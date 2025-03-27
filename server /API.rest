@@ -1,0 +1,24 @@
+### Define SERVER Variable ###
+@SERVER = http://localhost:8080/api/users
+
+### Register User ###
+POST {{SERVER}}/register
+Content-Type: application/json
+
+{
+  "name": "Siyabonga",
+  "surname": "zunu",
+  "email": "siya5@gmail.com",
+  "password": "Siy",
+  "confirmpassword": "Siy"
+}
+
+### Login User ###
+POST {{SERVER}}/login
+Content-Type: application/json
+
+{
+  "username": "hello",
+  "email": "hello@hello.com",
+  "password": "123456"
+}

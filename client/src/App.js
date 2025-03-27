@@ -4,8 +4,7 @@ import SplashScreens from './components/splash/mainsplash.jsx';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Dashboard from './components/dashboard/Dashboard';
-import Navbar from "./components/dashboard/shared/navbar/Navbar";
-import Footer from './components/dashboard/shared/footer/Footer.jsx';
+import Navbar from "./components/dashboard/shared/Navbar";
 
 function App() {
   return (
@@ -15,14 +14,12 @@ function App() {
           <Route path="/" element={<SplashScreens />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
-
-          <Route path="/dashboard"  element={<>
-                <Navbar />
-                <Dashboard />
-              </>
-            } 
-          />
+          <Route path="/dashboard" element={
+            <div className="dashboard-layout"> 
+              <Navbar />
+              <Dashboard />
+            </div>
+          } />
         </Routes>
       </div>
     </BrowserRouter>

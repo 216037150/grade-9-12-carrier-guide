@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import './Register.css'; // Import the CSS file
+import './Register.css'; 
 
 function Register() {
   const [name, setName] = useState('');
@@ -12,7 +12,7 @@ function Register() {
   const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccessMessage('');
@@ -28,11 +28,42 @@ function Register() {
       return;
     }
 
-    setSuccessMessage('Registration successful!');
-    console.log('Registration data:', { name, surname, email, password });
+    // Prepare the data to be sent to the backend
+    const userData = {
+      name,
+      surname,
+      email,
+      password,
+      confirmpassword: confirmPassword,
+    };
 
-    localStorage.setItem('isRegistered', 'true');
-    navigate('/login');
+    try {
+      // Sending the POST request to register the user
+      const response = await fetch('http://localhost:8080/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      // Handle the response
+      if (response.ok) {
+        const result = await response.json();
+        setSuccessMessage('Registration successful!');
+        console.log('Registration successful:', result);
+
+        // Optionally, store user data in localStorage or sessionStorage
+        localStorage.setItem('isRegistered', 'true');
+        navigate('/login');
+      } else {
+        const errorResult = await response.json();
+        setError(errorResult.message || 'An error occurred. Please try again.');
+      }
+    } catch (err) {
+      setError('Error connecting to the server.');
+      console.error('Error during registration:', err);
+    }
   };
 
   return (

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 @Service
 public class UserService {
@@ -14,7 +16,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // Register user
     public User registerUser(UserDTO userDTO) throws NoSuchAlgorithmException {
         if (!userDTO.getPassword().equals(userDTO.getConfirmpassword())) {
             throw new IllegalArgumentException("Passwords do not match");
@@ -24,34 +25,52 @@ public class UserService {
         user.setName(userDTO.getName());
         user.setSurname(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());
-        user.setPassword(hashPassword(userDTO.getPassword()));
+
+        String salt = generateSalt();
+        String hashedPassword = hashPassword(userDTO.getPassword(), salt);
+        user.setPassword(hashedPassword);
+        user.setSalt(salt); // Save the salt along with the hashed password
 
         return userRepository.save(user);
     }
 
-    // Login user
-    public User loginUser(String email, String password) throws NoSuchAlgorithmException {
+    public void loginUser(String email, String hashedPassword) throws NoSuchAlgorithmException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new IllegalArgumentException("Invalid email"));
 
-        if (!checkPassword(password, user.getPassword())) {
+        System.out.println("Salt: " + user.getSalt());
+        System.out.println("Front end hash: " + hashedPassword);
+        System.out.println("Database hash: " + user.getPassword());
+
+        if (!hashedPassword.equals(user.getPassword())) {
             throw new IllegalArgumentException("Invalid credentials");
         }
-        return user;
     }
 
-    // Simple password hashing using SHA-256
-    private String hashPassword(String password) throws NoSuchAlgorithmException {
+    private String generateSalt() {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] saltBytes = new byte[16];
+        secureRandom.nextBytes(saltBytes);
+        return Base64.getEncoder().encodeToString(saltBytes);
+    }
+
+    private String hashPassword(String password, String salt) throws NoSuchAlgorithmException {
+        if (salt == null) {
+            throw new IllegalArgumentException("Salt must not be null");
+        }
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        digest.update(salt.getBytes());  // Add salt to the password
         byte[] hashedBytes = digest.digest(password.getBytes());
+
         StringBuilder hexString = new StringBuilder();
         for (byte b : hashedBytes) {
-            hexString.append(String.format("%02x", b));
+            hexString.append(String.format("%02x", b)); // Convert byte array to hex string
         }
         return hexString.toString();
     }
 
-    // Check if the provided password matches the stored hashed password
-    private boolean checkPassword(String inputPassword, String storedPassword) throws NoSuchAlgorithmException {
-        return storedPassword.equals(hashPassword(inputPassword));
+    public User getUserByEmail(String email) {
+        System.out.println("Email received in getUserByEmail: " + email);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email"));
     }
 }

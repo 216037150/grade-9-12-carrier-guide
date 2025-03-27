@@ -9,9 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -23,21 +26,18 @@ public class UserController {
             User user = userService.registerUser(userDTO);
             return new ResponseEntity<>(user, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            // Better error response
             return new ResponseEntity<>("Passwords do not match or other validation errors", HttpStatus.BAD_REQUEST);
         } catch (NoSuchAlgorithmException e) {
-            // Handle NoSuchAlgorithmException more gracefully
             return new ResponseEntity<>("Error encoding password", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
-            // Catch any other unexpected errors
             return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<String> loginUser(@RequestBody Map<String, String> payload) { // Modified to accept Map
         try {
-            userService.loginUser(userDTO.getEmail(), userDTO.getPassword());
+            userService.loginUser(payload.get("email"), payload.get("password")); // Get email and hashed password from Map
             return new ResponseEntity<>("Login successful", HttpStatus.OK);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
@@ -46,5 +46,13 @@ public class UserController {
         } catch (Exception e) {
             return new ResponseEntity<>("An unexpected error occurred: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/salt")
+    public ResponseEntity<Map<String, String>> getSalt(@RequestParam String email) {
+        User user = userService.getUserByEmail(email);
+        Map<String, String> response = new HashMap<>();
+        response.put("salt", user.getSalt());
+        return ResponseEntity.ok(response);
     }
 }
