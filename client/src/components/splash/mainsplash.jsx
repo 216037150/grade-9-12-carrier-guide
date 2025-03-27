@@ -4,7 +4,6 @@ import SplashScreen1 from './SplashScreen1';
 import SplashScreen2 from './SplashScreen2';
 import SplashScreen3 from './SplashScreen3';
 import Skip from './Skip';
-
 function SplashScreens() {
   const [currentScreen, setCurrentScreen] = useState(1);
   const navigate = useNavigate();
