@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogoutClick = (e) => {
+    e.preventDefault();
+    navigate('/logout');
+    setIsMenuOpen(false);
   };
 
   return (
@@ -21,16 +30,21 @@ const Navbar = () => {
         </div>
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <li>
-            <a href="/" className="nav-link">Home</a>
+            <Link to="/" className="nav-link">Home</Link>
           </li>
           <li>
-            <a href="/dashboard" className="nav-link">Dashboard</a>
+            <Link to="/dashboard" className="nav-link">Dashboard</Link>
           </li>
           <li>
-            <a href="/login" className="nav-link">Login</a>
+            <Link to="/login" className="nav-link">Login</Link>
           </li>
           <li>
-            <a href="/register" className="nav-link">Register</a>
+            <Link to="/register" className="nav-link">Register</Link>
+          </li>
+          <li>
+            <a href="/logout" className="nav-link" onClick={handleLogoutClick}>
+              <i className="fa fa-user" aria-hidden="true"></i> Logout
+            </a>
           </li>
         </ul>
       </div>

@@ -5,6 +5,8 @@ import Login from './components/login/Login.jsx';
 import Register from './components/register/Register.jsx';
 import Dashboard from './components/dashboard/Dashboard.jsx';
 import Navbar from './components/dashboard/shared/Navbar.jsx';
+import Logout from './components/dashboard/Logout.jsx';
+import DarkModeToggle from "./components/dashboard/DakrModeToggle.jsx"
 
 function App() {
   return (
@@ -14,12 +16,16 @@ function App() {
           <Route path="/" element={<SplashScreens />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
           <Route path="/dashboard" element={
             <div className="dashboard-layout">
               <Navbar />
               <Dashboard />
+              <DarkModeToggle />
             </div>
           } />
+
+          <Route path="/logout" element={ <Logout />} />
         </Routes>
       </div>
     </BrowserRouter>

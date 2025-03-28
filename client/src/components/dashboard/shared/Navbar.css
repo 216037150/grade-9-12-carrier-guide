@@ -68,6 +68,10 @@
   padding: 10px;
 }
 
+.nav-links a i {
+  margin-right: 5px; 
+}
+
 @media screen and (max-width: 768px) {
   .navbar-container {
     flex-direction: column;
