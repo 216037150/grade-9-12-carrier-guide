@@ -1,4 +1,4 @@
-package com.grade9.server.exception;
+package com.grade9.server.ExceptionErrorHandling;
 
 import com.grade9.server.dto.ResponseMessage;
 import org.springframework.http.HttpStatus;
