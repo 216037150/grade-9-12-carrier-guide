@@ -1,0 +1,16 @@
+/* General styles */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+html.light-mode {
+  background-color: white;
+  color: black;
+}
+
+/* Dark Mode */
+html.dark-mode {
+  background-color: black;
+  color: white;
+}

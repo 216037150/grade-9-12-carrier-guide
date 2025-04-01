@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import SplashScreen1 from './SplashScreen1';
 import SplashScreen2 from './SplashScreen2';
 import SplashScreen3 from './SplashScreen3';
+
 import Skip from './Skip';
 function SplashScreens() {
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -33,6 +34,7 @@ function SplashScreens() {
     <div className="splash-container">
       <Skip />
       {renderScreen()}
+
     </div>
   );
 }
