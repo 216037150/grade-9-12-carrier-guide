@@ -7,13 +7,13 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false); // Add loading state
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true); // Show loader immediately after clicking login
+    setLoading(true); 
 
     try {
       const response = await fetch('http://localhost:8080/api/users/login', {
@@ -26,8 +26,8 @@ function Login() {
 
       if (response.ok) {
         setTimeout(() => {
-          navigate('/dashboard'); // Navigate only after loading
-        }, 2000); // Simulate loading delay for a better user experience
+          navigate('/dashboard'); 
+        }, 2000);
       } else {
         const errorData = await response.json();
         setError(errorData.message || 'Invalid email or password.');
@@ -37,14 +37,14 @@ function Login() {
       console.error('Login error:', err);
     } finally {
       setTimeout(() => {
-        setLoading(false); // Stop loading
-      }, 2000); // Match delay to the navigation time
+        setLoading(false); 
+      }, 2000); 
     }
   };
 
   return (
     <div className="login-container">
-      {loading ? ( // Show loader only when loading
+      {loading ? ( 
         <Loader />
       ) : (
         <div className="login-form">

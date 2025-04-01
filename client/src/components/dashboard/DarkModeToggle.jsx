@@ -7,7 +7,7 @@ const DarkModeToggle = () => {
   );
 
   useEffect(() => {
-    const root = document.documentElement; // Target `html`
+    const root = document.documentElement; 
 
     if (darkMode) {
       root.classList.add("dark-mode");

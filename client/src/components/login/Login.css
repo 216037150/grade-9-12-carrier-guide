@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
     padding: 20px;
     box-sizing: border-box;
   }
@@ -13,20 +13,19 @@
     padding: 30px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: white;
+    /* background-color: white; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .login-form h1 {
     text-align: center;
     margin-bottom: 25px;
-    color: #333;
+
   }
 
   .login-form label {
     display: block;
     margin-bottom: 10px;
-    color: #555;
     width: 100%;
   }
 
@@ -44,7 +43,7 @@
     width: calc(100% - 18px); /* Adjusted width to match input */
     padding: 12px;
     background-color: #007bff;
-    color: white;
+    
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -66,7 +65,6 @@
   .login-form p {
     text-align: center;
     margin-top: 20px;
-    color: #777;
   }
 
   .login-form p a {

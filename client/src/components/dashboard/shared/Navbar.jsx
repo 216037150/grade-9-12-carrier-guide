@@ -41,7 +41,7 @@ const Navbar = () => {
         </div>
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
           <li><Link to="/" className="nav-link">Home</Link></li>
-          <li><Link to="/dashboard" className="nav-link">Dashboard</Link></li>
+          <li><Link to="/dashboard" className="nav-link" >Dashboard</Link></li>
           <li>
             <i className="fa fa-user-circle" aria-hidden="true"></i>
             <Link to="/profile" className="nav-link">
@@ -50,7 +50,7 @@ const Navbar = () => {
           </li>
           <li>
             <a href="/logout" className="nav-link" onClick={handleLogoutClick}>
-              <i className="fa fa-sign-out" aria-hidden="true"></i> Sign-out
+              <i className="fa fa-sign-out" aria-hidden="true"></i> Logout
             </a>
           </li>
         </ul>
