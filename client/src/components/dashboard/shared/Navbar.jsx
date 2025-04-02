@@ -32,7 +32,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo">
-          <h2>Career Guide</h2>
+          <img src="images/logo.png" alt="" />
         </div>
         <div className={`hamburger ${isMenuOpen ? 'open' : ''}`} onClick={toggleMenu}>
           <span className="bar"></span>

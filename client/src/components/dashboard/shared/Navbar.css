@@ -1,8 +1,14 @@
 /* Navbar Styles */
 .navbar {
-  background-color: #333;
+  background-color: #183453;
   padding: 10px 0;
+  width: 100%;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 1000; 
 }
+
 
 .navbar-container {
   display: flex;
@@ -12,9 +18,14 @@
   margin: 0 auto;
 }
 
-.logo h2 {
+.logo img{
   color: white;
-  margin-left: -130px;
+  height: 30px;
+  width: 28px;
+  border-radius: 2px;
+  margin-left: -113px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: small;
 }
 
 .nav-links {
@@ -98,5 +109,14 @@
     padding: 10px 20px;
     width: 100%;
     text-align: right;
+  }
+  .logo img{
+    color: white;
+    height: 30px;
+    width: 28px;
+    border-radius: 2px;
+    margin-left: 2px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
   }
 }

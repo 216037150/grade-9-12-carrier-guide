@@ -58,12 +58,20 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); 
   background-color: azure;
   border-radius: 20px;
+
+}
+
+.h1Title{
+  margin-top: 50px;
+  margin-bottom: 2px;
 }
 
 .icon {
-  font-size: 10rem;         
-  transition: transform 0.3s ease, color 0.3s ease; 
+  font-size: 10rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  margin-top: -200px;
 }
+
 
 .icon:hover {
   transform: scale(1.2);   

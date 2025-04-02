@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import SplashScreens from "./components/splash/mainsplash.jsx";
 import Login from "./components/login/Login.jsx";
 import Register from "./components/register/Register.jsx";

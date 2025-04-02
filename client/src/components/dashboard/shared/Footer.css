@@ -1,19 +1,29 @@
+.footer-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 
 .footer {
-    background-color: #333;
-    color: #fff; 
-    padding: 20px 0;
+    background-color: #183453;
+    color: #fff;
+    padding: 60px 0;
     text-align: center;
     width: 100%;
     font-size: 0.9em;
-    border-top: 1px solid #444;
-    margin-top:371px;
+    /* border-top: 5px solid #444;  */
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-  
+
+
 .footer-content {
-    max-width: 100%; 
-    margin: 0 auto; 
-    padding: 0 20px; 
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .footer-text {
@@ -27,4 +37,13 @@
 
 .footer-text a:hover {
     text-decoration: underline;
+}
+
+/* Ensure full width on smaller screens */
+@media screen and (max-width: 768px) {
+    .footer {
+        max-width: 100%;
+        text-align: center;
+        position: relative; /* Prevents overlapping with content */
+    }
 }
